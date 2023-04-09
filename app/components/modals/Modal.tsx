@@ -85,6 +85,7 @@ const Modal: React.FC<ModalProps> = ({
           bg-neutral-800/70
         "
         onClick={handleClose}
+        onTouchStart={handleClose}
       >
         <div className="
           relative 
@@ -99,6 +100,7 @@ const Modal: React.FC<ModalProps> = ({
           md:h-auto
           "
           onClick={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           {/*content*/}
           <div className={`
@@ -146,6 +148,7 @@ const Modal: React.FC<ModalProps> = ({
                     left-9
                   "
                   onClick={handleClose}
+
                 >
                   <IoMdClose size={18} />
                 </button>
