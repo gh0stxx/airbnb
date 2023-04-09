@@ -1,7 +1,8 @@
-import { User } from "@prisma/client";
+import { User } from '@prisma/client';
 
-export type safeUser = Omit<User,
-"createdAt" | "updatedAt" | "emailVerified"
+export type safeUser = Omit<
+    User,
+    'createdAt' | 'updatedAt' | 'emailVerified'
 > & {
     createdAt: string;
     updatedAt: string;
