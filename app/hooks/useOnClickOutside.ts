@@ -1,17 +1,20 @@
 import { useEffect } from "react";
 
-
-export default function useOnClickOutside(ref: React.RefObject<HTMLInputElement>, onClose: () => void ) {
-
+export default function useOnClickOutside(ref: React.RefObject<HTMLElement>, onClose: () => void) {
     useEffect(() => {
-      const checkIfClickedOutside = (e: MouseEvent) => {
-        if (ref.current && !ref.current.contains(e.target as HTMLElement)) {
-          onClose()
-        }
-      }
-      document.addEventListener("click", checkIfClickedOutside)
-      return () => {
-        document.removeEventListener("click", checkIfClickedOutside)
-      }
-    }, [onClose, ref])
+        const handleClickOrTouchOutside = (e: MouseEvent | TouchEvent) => {
+            if (ref.current && !ref.current.contains(e.target as HTMLElement)) {
+                onClose();
+            }
+        };
+
+        document.addEventListener("click", handleClickOrTouchOutside);
+        document.addEventListener("touchstart", handleClickOrTouchOutside);
+
+        return () => {
+            document.removeEventListener("click", handleClickOrTouchOutside);
+            document.removeEventListener("touchstart", handleClickOrTouchOutside);
+        };
+    }, [onClose, ref]);
 }
+
