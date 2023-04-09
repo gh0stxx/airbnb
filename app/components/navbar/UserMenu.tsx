@@ -2,20 +2,21 @@
 
 import { AiOutlineMenu } from 'react-icons/ai';
 import Avatar from '../Avatar';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import MenuItem from './MenuItem';
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { signOut } from 'next-auth/react';
 import { safeUser } from '@/app/types';
 import useRentModal from '@/app/hooks/useRentModal';
+import useOnClickOutside from '@/app/hooks/useOnClickOutside';
 
 interface UserMenuProps {
     currentUser?: safeUser | null;
 }
 
 export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
-
+    const ref = useRef<HTMLInputElement>(null);
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const rentModal = useRentModal();
@@ -25,12 +26,18 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         setIsOpen((value) => !value);
     }, []);
 
+    const clickOutside = useCallback(() => {
+        setIsOpen(false);
+    }, []);
+
     const onRent = useCallback(() => {
         if (!currentUser) {
             return loginModal.onOpen();
         }
         rentModal.onOpen();
     }, [currentUser, loginModal, rentModal]);
+
+    useOnClickOutside(ref, () => clickOutside());
 
     return (
         <div className="relative">
@@ -68,22 +75,37 @@ export const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
-                        <Avatar src={currentUser?.image}/>
+                        <Avatar src={currentUser?.image} />
                     </div>
                 </div>
             </div>
             {isOpen && (
                 <div className="absolute md:w-3/4 w-[40vw] bg-white rounded-md shadow-md overflow-hidden right-0 top-12 text-sm">
-                    <div className="flex flex-col cursor-pointer">
+                    <div className="flex flex-col cursor-pointer" ref={ref}>
                         {currentUser ? (
                             <>
                                 <MenuItem onClick={() => {}} label="My trips" />
-                                <MenuItem onClick={() => {}} label="My favorites" />
-                                <MenuItem onClick={() => {}} label="My reservations" />
-                                <MenuItem onClick={() => {}} label="My properties" />
-                                <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
+                                <MenuItem
+                                    onClick={() => {}}
+                                    label="My favorites"
+                                />
+                                <MenuItem
+                                    onClick={() => {}}
+                                    label="My reservations"
+                                />
+                                <MenuItem
+                                    onClick={() => {}}
+                                    label="My properties"
+                                />
+                                <MenuItem
+                                    onClick={rentModal.onOpen}
+                                    label="Airbnb my home"
+                                />
                                 <hr />
-                                <MenuItem onClick={() => signOut()} label="Logout" />
+                                <MenuItem
+                                    onClick={() => signOut()}
+                                    label="Logout"
+                                />
                             </>
                         ) : (
                             <>
