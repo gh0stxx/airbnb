@@ -50,7 +50,7 @@ const Input: React.FC<InputProps> = ({
             `}
             />
             <label
-                className={`absolu text- duration-1 transfo -translate-y top z- origin-[0]
+                className={`absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0]
                     ${formatPrice ? 'left-9' : 'left-4'}
                     peer-placeholder-shown:scale-100
                     peer-placeholder-shown:translate-y-0

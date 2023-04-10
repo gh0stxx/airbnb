@@ -75,11 +75,7 @@ const Modal: React.FC<ModalProps> = ({
                 onClick={handleClose}
                 onTouchStart={handleClose}
             >
-                <div
-                    className=" relative  w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto  h-full  lg:h-auto md:h-auto "
-                    onClick={(e) => e.stopPropagation()}
-                    onTouchStart={(e) => e.stopPropagation()}
-                >
+                <div className=" relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 my-6 mx-auto  h-full lg:h-auto md:h-auto">
                     {/*content*/}
                     <div
                         className={`translateduration-300h-full${
@@ -89,11 +85,13 @@ const Modal: React.FC<ModalProps> = ({
                         <div
                             className="translateh-fulllg:h-automd:h-autoborder-0 rounded-lg shadow-lg
                           relative flex flex-col w-full bg-white outline-none focus:outline-none"
+                            onClick={(e) => e.stopPropagation()}
+                            onTouchStart={(e) => e.stopPropagation()}
                         >
                             {/*header*/}
-                            <div className=" flex  items-center  p-6 rounded-t justify-center relative border-b-[1px]">
+                            <div className="flex items-center  p-6 rounded-t justify-center relative border-b-[1px]">
                                 <button
-                                    className=" p-1 border-0  hover:opacity-70 transition absolute left-9"
+                                    className="p-1 border-0 hover:opacity-70 transition absolute left-9"
                                     onClick={handleClose}
                                 >
                                     <IoMdClose size={18} />

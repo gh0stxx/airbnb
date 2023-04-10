@@ -6,7 +6,7 @@ export default function useOnClickOutside(
 ) {
     useEffect(() => {
         const handleClickOrTouchOutside = (e: MouseEvent | TouchEvent) => {
-            if (ref.current && !ref.current.contains(e.target as HTMLElement)) {
+            if (ref.current && !ref.current.contains(e.target as Node)) {
                 onClose();
             }
         };
