@@ -14,8 +14,16 @@ interface HomeProps {
 //export const dynamic = 'force-dynamic'
 
 const Home = async ({ searchParams }: HomeProps) => {
+
+  if (searchParams === undefined) {
+    return (
+      <ClientOnly>
+        <EmptyState />
+      </ClientOnly>
+    );
+  }
   
-  const listings = await getListings(searchParams) || null;
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
@@ -24,7 +32,7 @@ const Home = async ({ searchParams }: HomeProps) => {
         <EmptyState showReset />
       </ClientOnly>
     );
-  }
+  } 
 
   return (
     <ClientOnly>
@@ -54,5 +62,5 @@ const Home = async ({ searchParams }: HomeProps) => {
     </ClientOnly>
   )
 }
-
+  
 export default Home;
