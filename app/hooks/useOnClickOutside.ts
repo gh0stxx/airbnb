@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
-export default function useOnClickOutside(
+const useOnClickOutside = (
     ref: React.RefObject<HTMLElement>,
     onClose: () => void
-) {
+) => {
     useEffect(() => {
         const handleClickOrTouchOutside = (e: MouseEvent | TouchEvent) => {
             if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -18,3 +18,5 @@ export default function useOnClickOutside(
         };
     }, [onClose, ref]);
 }
+
+export default useOnClickOutside;
