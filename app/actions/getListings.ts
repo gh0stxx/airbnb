@@ -29,7 +29,7 @@ export default async function getListings(
     let query: any = {};
 
     if (userId) {
-      query.userId = userId || null;
+      query.userId = userId;
     }
 
     if (category) {
