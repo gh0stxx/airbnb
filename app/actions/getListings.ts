@@ -16,14 +16,14 @@ export default async function getListings(
 ) {
   try {
     const {
-      userId = null,
-      roomCount = null, 
-      guestCount = null, 
-      bathroomCount = null, 
-      locationValue = null,
-      startDate = null,
-      endDate = null,
-      category = null,
+      userId,
+      roomCount, 
+      guestCount, 
+      bathroomCount, 
+      locationValue,
+      startDate,
+      endDate,
+      category,
     } = params;
 
     let query: any = {};
