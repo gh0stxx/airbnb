@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import prisma from "@/app/libs/prismadb";
+import client from "@/app/libs/prismadb";
 
 interface IParams {
   listingId?: string;
 }
 
 export async function DELETE(
-  request: Request, 
+  request: Request,
   { params }: { params: IParams }
 ) {
   const currentUser = await getCurrentUser();
@@ -23,7 +23,7 @@ export async function DELETE(
     throw new Error('Invalid ID');
   }
 
-  const listing = await prisma.listing.deleteMany({
+  const listing = await client.listing.deleteMany({
     where: {
       id: listingId,
       userId: currentUser.id
